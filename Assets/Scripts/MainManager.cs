@@ -1,10 +1,9 @@
-using System.IO;//Added this myself
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
+
 public class MainManager : MonoBehaviour
 {
     public Brick BrickPrefab;
@@ -19,50 +18,7 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    //*My variables
-    public static MainManager Instance;
-
-    public Text PlayerName;
-    //public static Text PlayerName;
-
-    private void Awake(){
-        if(Instance != null){
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        //LoadName();
-
-    }
-
-    [System.Serializable]
-    class SaveData{
-        public Text PlayerName;
-    }
-
-    public void SaveName(){
-        SaveData data = new SaveData();
-        data.PlayerName = PlayerName;
-
-        string json = JsonUtility.ToJson(data);
-
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-        Debug.Log("Data saved with this name: " + PlayerName);
-    }
-
-    public void LoadName(){
-        string path = Application.persistentDataPath + "/savefile.json";
-        if(File.Exists(path)){
-            string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
-
-            PlayerName = data.PlayerName;
-        }
-        Debug.Log("Loaded data: " + PlayerName);
-    }
-
+    
     // Start is called before the first frame update
     void Start()
     {
